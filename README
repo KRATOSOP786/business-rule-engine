@@ -1,0 +1,63 @@
+# Business Rule Engine (BRE)
+
+This is a Business Rule Engine (BRE) that allows users (specifically admins) to create dynamic business rules through a user-friendly frontend interface. The system generates SQL queries based on these rules and executes them using cron jobs to trigger actions such as sending emails, updating records, or notifying users. The backend uses **Node.js**, **SQL Server** (SSMS), and **cron jobs** to automate rule evaluation and action execution.
+
+## Features
+
+- **Rule Creation**: Admins can create rules by selecting conditions and actions through the frontend.
+- **Dynamic SQL Query Generation**: Rules are translated into SQL queries dynamically based on admin inputs.
+- **Scheduled Rule Execution**: Cron jobs periodically check if any rules are triggered and execute actions (e.g., sending emails or updating records).
+- **Action Types**: Support for multiple action types, such as **send_email**, **update_record**, **send_notification**, and more.
+- **Rule Logging**: Execution logs are maintained to track which rules were triggered and which actions were executed.
+
+## Prerequisites
+
+- **Node.js** (version 14 or higher)
+- **SQL Server Management Studio (SSMS)**
+- **Cron Jobs** (for scheduled rule execution)
+
+## Installation
+
+Follow these steps to get your development environment up and running.
+
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/your-username/business-rule-engine.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd business-rule-engine
+    ```
+
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+4. Configure your **SQL Server** connection and make sure your database is set up with the necessary tables (e.g., `Rules`, `Actions`, `ExecutionLogs`).
+
+5. Start the backend server:
+    ```bash
+    npm start
+    ```
+
+6. Cron jobs are set up to run at regular intervals. Make sure your system is configured to run the scheduled tasks.
+
+## Usage
+
+- Admins can access the **frontend** (UI) to create and manage rules.
+- Once a rule is created, it is stored in the **database** and is automatically evaluated by the system.
+- Cron jobs run periodically to evaluate all stored rules and trigger corresponding actions if conditions are met.
+
+### Example Rule
+
+A sample rule could be:  
+**Condition**: If **Employee performance score** is less than **50**, then trigger an action.
+
+- SQL Query Generated:
+    ```sql
+    SELECT * FROM Employees WHERE performance_score < 50;
+    ```
+
+- Action Triggered: **Send an email** to HR notifying them about the employee's performance.
