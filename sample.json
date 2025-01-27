@@ -1,0 +1,15 @@
+
+{
+    "SessionId": 1,
+    "QuestionLoaded(QuestionID from Questions Master Table)": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 
+    "StudentId":101,
+    "ObjectId": 1,
+    "Attempted": 5,
+    "CurrentQuestion": 3,
+    "isSubmitted": false,
+    "isDisconnected": true,
+    "disconnectTime": "2024-10-07T14:30:00Z",
+    "reconnectTime": "2024-10-07T14:35:00Z",
+    "CurrentScore": 10,
+    "TotalScore": 40
+}  

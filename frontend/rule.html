@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuleEngine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background for better contrast */
+        }
+        .container {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 0.5rem;
+            background-color: white;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        hr {
+            margin: 20px 0;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-light shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container text-center">
+        <form id="ruleForm">
+            <h2>Create the Business Rule:</h2>
+            <hr>
+
+            <!-- Rule Selection -->
+            <div class="mb-3 row">
+                <label for="rule" class="col-md-6 col-form-label">1. Select Rule:</label>
+                <div class="col-md-6">
+                    <select id="rule" name="Rule_Name" class="form-select" required>
+                        <option value="" disabled selected>Select a rule</option>
+                        <option value="Notify">Notify</option>
+                        <option value="Notify Resume Missing">Notify Resume Missing</option>
+                        <option value="Notify To update">Notify To update </option>
+                        <option value="Discount">Discount</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Object Selection -->
+            <div class="mb-3 row">
+                <label for="object" class="col-md-6 col-form-label">2. Select Object:</label>
+                <div class="col-md-6">
+                    <select id="object" name="Rule_Object" class="form-select" required>
+                        <option value="" disabled selected>Select an object</option>
+                        <option value="Students">Student</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Parameter Selection -->
+            <div class="mb-3 row">
+                <label for="parameter" class="col-md-6 col-form-label">3. Select Parameter:</label>
+                <div class="col-md-6">
+                    <select id="parameter" name="Rule_Parameter" class="form-select" required>
+                        <option value="" disabled selected>Select a parameter</option>
+                        <option value="Resumefilepath">Resumefilepath</option>
+                        <option value="CourseCount">CourseCount</option>
+                        <option value="Updated_At">ResumeUpdated_At</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Condition Selection -->
+            <div class="mb-3 row">
+                <label for="condition" class="col-md-6 col-form-label">4. Select Condition:</label>
+                <div class="col-md-6">
+                    <select id="condition" name="Rule_Condition" class="form-select" required>
+                        <option value="" disabled selected>Select a condition</option>
+                        <option value="less_than">Less Than</option>
+                        <option value="none">None</option>
+                        <option value="greater_than">Greater than </option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Value/Threshold Selection -->
+            <div class="mb-3 row">
+                <label for="value" class="col-md-6 col-form-label">5. Select Value / Threshold:</label>
+                <div class="col-md-6">
+                    <select id="value" name="Rule_Value" class="form-select" required>
+                        <option value="" disabled selected>Select a value</option>
+                        <option value="null">Null</option>
+                        <option value="5000">5000</option>
+                        <option value="1_minute">1 minute</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Frequency Selection -->
+            <div class="mb-3 row">
+                <label for="frequency" class="col-md-6 col-form-label">6. Select Frequency:</label>
+                <div class="col-md-6">
+                    <select id="frequency" name="Rule_Frequency" class="form-select" required>
+                        <option value="" disabled selected>Select frequency</option>
+                        <option value="1_day">1 day</option>
+                        <option value="2_day">2 days</option>
+                        <option value="1_minute">1 minute</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Element Selection -->
+            <div class="mb-3 row">
+                <label for="action" class="col-md-6 col-form-label">7. Action Element:</label>
+                <div class="col-md-6">
+                    <select id="action" name="Rule_Action" class="form-select" required>
+                        <option value="" disabled selected>Select an action</option>
+                        <option value="Email">Email</option>
+                        <option value="Whatsapp">Whatsapp</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Rule</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('ruleForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch("http://localhost:3000/api/rules/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`Rule created with ID: ${result.id}`);
+                    // Optionally clear the form or fetch rules again
+                    event.target.reset();
+                } else {
+                    alert("Error creating rule: " + response.statusText);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while creating the rule.");
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
